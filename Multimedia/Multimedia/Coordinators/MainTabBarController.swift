@@ -9,8 +9,9 @@ import UIKit
 
 final class MainTabBarController: UITabBarController {
     
-    private let feedVC = FactoryTab(flow: .feed)
-    private let profileVC = FactoryTab(flow: .profile)
+    private let audioFactory = FactoryTab(flow: .audio)
+    private let videoFactory = FactoryTab(flow: .video)
+    private let recorderFactory = FactoryTab(flow: .recorder)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,8 +21,9 @@ final class MainTabBarController: UITabBarController {
     
     private func setControllers() {
         viewControllers = [
-            feedVC.navigationController,
-            profileVC.navigationController
+            audioFactory.navigationController,
+            videoFactory.navigationController,
+            recorderFactory.navigationController
         ]
         
         selectedIndex = 0

@@ -6,24 +6,46 @@
 //
 
 import UIKit
+import WebKit
 
-class DetailVideoViewController: UIViewController {
+class DetailVideoViewController: UIViewController, WKUIDelegate {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    private var webView: WKWebView!
+    private let url: String
+    
+    init(url: String) {
+        self.url = url
+        super.init(nibName: nil, bundle: nil)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
-    */
+    
+    override func loadView() {
+        let webConfiguration = WKWebViewConfiguration()
+        webView = WKWebView(frame: .zero, configuration: webConfiguration)
+        webView.uiDelegate = self
+        view = webView
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        loadVideo()
+    }
+    
+    func loadVideo() {
+        let myURL = URL(string: url)
+        let myRequest = URLRequest(url: myURL!)
+        webView.load(myRequest)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.navigationBar.isTranslucent = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        navigationController?.navigationBar.isTranslucent = false
+    }
 
 }

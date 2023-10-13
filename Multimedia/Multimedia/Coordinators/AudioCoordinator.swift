@@ -8,23 +8,16 @@
 import UIKit
 
 protocol AudioCoordinatorProtocol {
-//    func showCheckResult(result: Bool)
-//    func showPost(post: Post)
+    func showErrorPlay(_ text: String)
 }
 
 final class AudioCoordinator: AudioCoordinatorProtocol {
    
     var navigationController: UINavigationController?
     
-//    func showPost(post: StorageService.Post) {
-//        let postViewController = PostViewController()
-//        postViewController.post = post
-//        navigationController?.pushViewController(postViewController, animated: true)
-//    }
-//
-//    func showCheckResult(result: Bool) {
-//        let alert = UIAlertController(title: "Check word", message: result ? "Right!" : "False! Try to enter 'word'", preferredStyle: .alert)
-//        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default))
-//        navigationController?.present(alert, animated: true, completion: nil)
-//    }
+    func showErrorPlay(_ text: String) {
+        let alert = UIAlertController(title: "Error play", message: text, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        navigationController?.present(alert, animated: true, completion: nil)
+    }
 }
